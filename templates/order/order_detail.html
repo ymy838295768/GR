@@ -1,0 +1,58 @@
+{% extends 'base/base_order.html' %}
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'App/order/css/order_detail.css' %}">
+{% endblock %}
+
+{% block extJS %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'App/order/js/order_detail.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <p class="order_no">订单编号:{{ order_no }}</p>
+
+        <div class="order_info">
+
+            {#      订单商品    #}
+            <ul>
+                {#      order 订单数据       #}
+                {#      订单  和 订单商品表  什么关系      #}
+                {% for ordergoods in order.ordergoods_set.all %}
+
+                    <li>
+
+                        <a href="#">
+                            <img src="{{ ordergoods.o_goods.productimg }}">
+                            <div class="shoppingInfo">
+                                <h6>{{ ordergoods.o_goods.productlongname }}</h6>
+
+                                <p class="unit">{{ ordergoods.o_goods.specifics }}</p>
+                                <p class="price">
+                                    <span>￥{{ ordergoods.o_goods.price }}</span>
+                                </p>
+                            </div>
+                        </a>
+                        <section>
+                            <span>{{ ordergoods.o_goods_num }}</span>
+                        </section>
+                    </li>
+
+                {% endfor %}
+
+
+            </ul>
+
+            <p class="total_price">总价:0</p>
+
+            <button id="alipay" orderid="{{ order_no }}" class="btn btn-success btn-block">支付</button>
+        </div>
+
+    </div>
+
+{% endblock %}
