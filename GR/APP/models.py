@@ -35,10 +35,7 @@ class HomeShop(Home):
     class Meta:
         db_table = 'axf_shop'
 
-"""
-(trackid,name,img,categoryid,brandname,img1,childcid1,productid1,longname1,price1,marketprice1,
-img2,childcid2,productid2,longname2,price2,marketprice2,img3,childcid3,productid3,longname3,price3,marketprice3)
-"""
+
 class HomeMainShow(Home):
 
     categoryid = models.IntegerField(default=1)
@@ -85,9 +82,7 @@ class HomeMainShow(Home):
         db_table = 'axf_mainshow'
 
 
-"""
-typeid,typename,childtypenames,typesort
-"""
+
 class FoodType(models.Model):
     typeid = models.IntegerField(default=1)
     typename = models.CharField(max_length=16)
@@ -98,11 +93,7 @@ class FoodType(models.Model):
         db_table = 'axf_foodtypes'
 
 
-"""
-(productid,productimg,productname,productlongname,isxf,pmdesc,specifics,price,marketprice,categoryid,childcid,
-childcidname,dealerid,storenums,productnum) values("11951","http://img01.bqstatic.com/upload/goods/000/001/1951/0000011951_63930.jpg@200w_200h_90Q",
-"","乐吧薯片鲜虾味50.0g",0,0,"50g",2.00,2.500000,103541,103543,"膨化食品","4858",200,4)
-"""
+
 class Goods(models.Model):
     productid = models.IntegerField(default=1)
     productimg = models.CharField(max_length=200)
@@ -159,23 +150,14 @@ class CartModel(models.Model):
 class OrderModel(models.Model):
 
     o_user = models.ForeignKey(UserModel)
-    """
-        0   已下单，未付款
-        1   已下单，已付款，未发货
-        2   已下单，已付款，已发货，未收货
-        3   ...
-    """
+
+
     o_status = models.IntegerField(default=0)
 
     o_time = models.DateTimeField(auto_now=True)
 
 
-"""
-    订单商品表
-        订单中的商品信息
-            - 商品是哪一个商品
-            - 商品数量
-"""
+
 class OrderGoods(models.Model):
     o_order = models.ForeignKey(OrderModel)
 
