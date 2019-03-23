@@ -57,13 +57,7 @@ def home(request):
 def market(request):
     return redirect(reverse('axf:market_with_params', args=('104749', '0', '0')))
 
-"""
-    sort_rule 排序规则
-        实现的时候就是前后端商议好传递的数据
-        0    综合排序
-        1    代表价格升序
-        2    代表价格降序
-"""
+
 def market_with_params(request, categoryid, childcid, sort_rule):
 
     foodtypes = FoodType.objects.order_by('typesort')
@@ -82,20 +76,12 @@ def market_with_params(request, categoryid, childcid, sort_rule):
 
     # 分类对象
     foodtype = FoodType.objects.get(typeid=categoryid)
-    """ 全部分类:0#进口水果:110 """
+
     childtypenames = foodtype.childtypenames
 
-    """
-        前端想要接收到的类型
-            - 列表，列表中包含 子类名字
-            - 还需要点击时的一个标识  子类对应的id值
-    """
+
     childtypename_list = childtypenames.split("#")
-    """
-        ['全部类型:0', '进口水果:110']
-        处理
-        [[全部类型,0], [进口水果, 110]]
-    """
+
     child_type_name_list = []
 
     for childtypename in  childtypename_list:
@@ -202,7 +188,7 @@ def user_register(request):
 
         request.session['user_id'] = user.id
 
-        # 发送邮件    token生成策略  自己写，使用 uuid， 引入第三方库 ，   secrets库   python 3.6
+
         token = str(uuid.uuid4())
 
 
@@ -313,8 +299,8 @@ def send_mail_learn(username, receive_email, token):
     subject = "%s爱鲜蜂账户激活" % username
 
     message = ""
-    # 固定，企业中使用的是公司企业邮箱的管理员
-    from_email = 'rongjiawei1204@163.com'
+
+    from_email = 'ymy16600207857@163.com'
     # 动态的
     recipient_list = [receive_email,]
 

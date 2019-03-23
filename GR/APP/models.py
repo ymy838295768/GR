@@ -117,7 +117,6 @@ class Goods(models.Model):
 
 class UserModel(models.Model):
     u_name = models.CharField(max_length=16, unique=True)
-    #
     password = models.CharField(max_length=256)
     u_email = models.CharField(max_length=32, unique=True)
     u_icon = models.ImageField(upload_to='icons')
